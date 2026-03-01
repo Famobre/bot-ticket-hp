@@ -1,5 +1,6 @@
 LOG_CHANNEL_ID = 1447675219132289075 # canal logs-tickets
 STAFF_ROLE_ID = 1447675210789818386 # cargo da staff
+print("BOT INICIANDO...")
 
 import discord
 from discord.ext import commands
