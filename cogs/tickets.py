@@ -78,7 +78,7 @@ tickets = {
             "e devem ser respeitados. Caso não possa comparecer, avise antes para reagendar. "
             "O não comparecimento pode gerar multa por atraso ou falta na consulta."
         ),
-        "image": "https://r2.fivemanage.com/7sUTqcu7vprswr5yQCsH5/A013B021-450B-4A4E-81CA-F62AD02C668A.png"
+        "image": "https://r2.fivemanage.com/7sUTqcu7vprswr5yQCsH5/CBF1DA5A-5A6D-42B2-9971-5C358A215655.png"
     },
 
     1447675217500442636: {  # LAUDOS
@@ -299,10 +299,6 @@ class TicketView(discord.ui.View):
     @discord.ui.button(label="💉 Cirurgia", style=discord.ButtonStyle.danger)
     async def cirurgia(self, interaction: discord.Interaction, button: discord.ui.Button):
         await self.criar_ticket(interaction, 1459032322266628172)
-
-    @discord.ui.button(label="📋 Laudos Médicos", style=discord.ButtonStyle.danger)
-    async def laudos(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await self.criar_ticket(interaction, 1447675217500442636)
 
     @discord.ui.button(label="🩺 Clínico Geral", style=discord.ButtonStyle.danger)
     async def clinico(self, interaction: discord.Interaction, button: discord.ui.Button):
