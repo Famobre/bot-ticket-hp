@@ -47,7 +47,7 @@ def plantao_api():
 def iniciar_api():
     app.run(host="0.0.0.0", port=5000)
 
-threading.Thread(target=iniciar_api).start()
+threading.Thread(target=iniciar_api, daemon=True).start()
 
 intents = discord.Intents.all()
 
@@ -57,6 +57,7 @@ bot = commands.Bot(
 )
 @bot.event
 async def setup_hook():
+    await carregar_cogs()
     await bot.tree.sync()
     print("🌐 Slash Commands sincronizados globalmente")
 
@@ -92,11 +93,6 @@ async def carregar_cogs():
     for arquivo in os.listdir("./cogs"):
         if arquivo.endswith(".py"):
             await bot.load_extension(f"cogs.{arquivo[:-3]}")
-
-
-@bot.event
-async def setup_hook():
-    await carregar_cogs()
 
 
 bot.run(os.getenv("DISCORD_TOKEN"))
