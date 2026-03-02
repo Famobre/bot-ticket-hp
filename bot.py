@@ -36,7 +36,7 @@ class PlantaoBot(commands.Bot):
         # Lista de status cíclicos
         self.status_list = itertools.cycle([
             discord.Game(name="Salvando vidas 🏥"),
-            discord.Activity(type=discord.ActivityType.watching, name="os pacientes 🩺"),
+            discord.Activity(type=discord.ActivityType.watching, name="ajudando os pacientes 🩺"),
             discord.Activity(type=discord.ActivityType.listening, name="chamados do plantão 🚑"),
             discord.Game(name="Cuidando de todos 🏙️"),
         ])
