@@ -268,7 +268,7 @@ async def criar_ticket(self, interaction: discord.Interaction, categoria_id: int
             if "image" in info:
                 embed.set_image(url=info["image"])
         
-        else:
+    else:
             embed = discord.Embed(
                 title="🎫 ABERTURA DE TICKET – HOSPITAL DISTRITO",
                 description="Descreva sua solicitação.",
@@ -278,24 +278,24 @@ async def criar_ticket(self, interaction: discord.Interaction, categoria_id: int
             embed.set_image(url="https://r2.fivemanage.com/7sUTqcu7vprswr5yQCsH5/image.png")
 
             await interaction.channel.send(embed=embed, view=TicketView(self.bot))
-        await channel.send(
+    await channel.send(
             f"{interaction.user.mention}",
             embed=embed,
             view=CloseTicketView(self.bot)
         )
 
-        log = discord.Embed(
+    log = discord.Embed(
             title="🎫 Ticket Criado",
             color=discord.Color.green(),
             timestamp=datetime.utcnow()
         )
-        log.add_field(name="Usuário", value=interaction.user.mention)
-        log.add_field(name="Categoria", value=categoria.name)
-        log.add_field(name="Canal", value=channel.mention)
+    log.add_field(name="Usuário", value=interaction.user.mention)
+    log.add_field(name="Categoria", value=categoria.name)
+    log.add_field(name="Canal", value=channel.mention)
 
-        await self.send_log(guild, log)
+    await self.send_log(guild, log)
 
-        await interaction.response.send_message(
+    await interaction.response.send_message(
             f"✅ Ticket criado em {channel.mention}",
             ephemeral=True
         )
