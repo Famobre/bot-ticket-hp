@@ -160,6 +160,13 @@ DESCRICOES_SETOR = {
          "image": "https://r2.fivemanage.com/7sUTqcu7vprswr5yQCsH5/6BB1561E-828E-4653-868B-A164FAEC1D23.png"
     },
 }
+CARGOS_SETOR = {
+    1459032323046510686: 1459032319380819999,  # PEDIATRIA -> ID do cargo Pediatria
+    1459032322803503186: 1459032319380819997,  # PSICOLOGIA -> ID do cargo Psicologia
+    1459032322266628172: 1459032319380820000,  # CIRURGIA -> ID do cargo Cirurgia
+    1459032323210215430: 1459032319380820001,  # OBSTETRÍCIA -> ID do cargo Obstetrícia
+    1459032321977225360: 1459032319380819998,  # CLÍNICO GERAL -> ID do cargo Clínico Geral
+}
 # =======================
 # BOTÃO FECHAR TICKET
 # =======================
@@ -218,32 +225,41 @@ class TicketView(discord.ui.View):
         if log_channel:
             await log_channel.send(embed=embed)
 
-    async def criar_ticket(self, interaction: discord.Interaction, categoria_id: int):
-        guild = interaction.guild
+async def criar_ticket(self, interaction: discord.Interaction, categoria_id: int):
+    guild = interaction.guild
 
-        categoria = discord.utils.get(guild.categories, id=categoria_id)
-        if not categoria:
-            await interaction.response.send_message(
-                f"❌ Categoria com ID {categoria_id} não encontrada.",
-                ephemeral=True
-            )
-            return
+    categoria = discord.utils.get(guild.categories, id=categoria_id)
+    if not categoria:
+        await interaction.response.send_message(
+            f"❌ Categoria com ID {categoria_id} não encontrada.",
+            ephemeral=True
+        )
+        return
 
-        overwrites = {
-            guild.default_role: discord.PermissionOverwrite(view_channel=False),
-            interaction.user: discord.PermissionOverwrite(view_channel=True, send_messages=True),
-            guild.me: discord.PermissionOverwrite(view_channel=True)
-        }
+    cargo_id = CARGOS_SETOR.get(categoria_id)
+    cargo_setor = guild.get_role(cargo_id)
 
-        channel = await guild.create_text_channel(
-            name=f"ticket-{interaction.user.name}",
-            category=categoria,
-            overwrites=overwrites
+    overwrites = {
+        guild.default_role: discord.PermissionOverwrite(view_channel=False),
+        interaction.user: discord.PermissionOverwrite(view_channel=True, send_messages=True),
+        guild.me: discord.PermissionOverwrite(view_channel=True)
+    }
+
+    if cargo_setor:
+        overwrites[cargo_setor] = discord.PermissionOverwrite(
+            view_channel=True,
+            send_messages=True
         )
 
-        info = tickets.get(categoria_id) or DESCRICOES_SETOR.get(categoria_id)
+    channel = await guild.create_text_channel(
+        name=f"ticket-{interaction.user.name}",
+        category=categoria,
+        overwrites=overwrites
+    )
 
-        if info:
+    info = tickets.get(categoria_id) or DESCRICOES_SETOR.get(categoria_id)
+
+    if info:
             embed = discord.Embed(
                 title=info["titulo"],
                 description=info["descricao"],
