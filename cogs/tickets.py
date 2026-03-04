@@ -225,41 +225,41 @@ class TicketView(discord.ui.View):
         if log_channel:
             await log_channel.send(embed=embed)
 
-async def criar_ticket(self, interaction: discord.Interaction, categoria_id: int):
-    guild = interaction.guild
+    async def criar_ticket(self, interaction: discord.Interaction, categoria_id: int):
+        guild = interaction.guild
 
-    categoria = discord.utils.get(guild.categories, id=categoria_id)
-    if not categoria:
-        await interaction.response.send_message(
-            f"❌ Categoria com ID {categoria_id} não encontrada.",
-            ephemeral=True
+        categoria = discord.utils.get(guild.categories, id=categoria_id)
+        if not categoria:
+            await interaction.response.send_message(
+                f"❌ Categoria com ID {categoria_id} não encontrada.",
+                ephemeral=True
+            )
+            return
+
+        cargo_id = CARGOS_SETOR.get(categoria_id)
+        cargo_setor = guild.get_role(cargo_id)
+
+        overwrites = {
+            guild.default_role: discord.PermissionOverwrite(view_channel=False),
+            interaction.user: discord.PermissionOverwrite(view_channel=True, send_messages=True),
+            guild.me: discord.PermissionOverwrite(view_channel=True)
+        }
+
+        if cargo_setor:
+            overwrites[cargo_setor] = discord.PermissionOverwrite(
+                view_channel=True,
+                send_messages=True
+            )
+
+        channel = await guild.create_text_channel(
+            name=f"ticket-{interaction.user.name}",
+            category=categoria,
+            overwrites=overwrites
         )
-        return
 
-    cargo_id = CARGOS_SETOR.get(categoria_id)
-    cargo_setor = guild.get_role(cargo_id)
+        info = tickets.get(categoria_id) or DESCRICOES_SETOR.get(categoria_id)
 
-    overwrites = {
-        guild.default_role: discord.PermissionOverwrite(view_channel=False),
-        interaction.user: discord.PermissionOverwrite(view_channel=True, send_messages=True),
-        guild.me: discord.PermissionOverwrite(view_channel=True)
-    }
-
-    if cargo_setor:
-        overwrites[cargo_setor] = discord.PermissionOverwrite(
-            view_channel=True,
-            send_messages=True
-        )
-
-    channel = await guild.create_text_channel(
-        name=f"ticket-{interaction.user.name}",
-        category=categoria,
-        overwrites=overwrites
-    )
-
-    info = tickets.get(categoria_id) or DESCRICOES_SETOR.get(categoria_id)
-
-    if info:
+        if info:
             embed = discord.Embed(
                 title=info["titulo"],
                 description=info["descricao"],
@@ -267,35 +267,32 @@ async def criar_ticket(self, interaction: discord.Interaction, categoria_id: int
             )
             if "image" in info:
                 embed.set_image(url=info["image"])
-        
-    else:
+        else:
             embed = discord.Embed(
                 title="🎫 ABERTURA DE TICKET – HOSPITAL DISTRITO",
                 description="Descreva sua solicitação.",
                 color=discord.Color.dark_gold()
             )
-
             embed.set_image(url="https://r2.fivemanage.com/7sUTqcu7vprswr5yQCsH5/image.png")
 
-            await interaction.channel.send(embed=embed, view=TicketView(self.bot))
-    await channel.send(
+        await channel.send(
             f"{interaction.user.mention}",
             embed=embed,
             view=CloseTicketView(self.bot)
         )
 
-    log = discord.Embed(
+        log = discord.Embed(
             title="🎫 Ticket Criado",
             color=discord.Color.green(),
             timestamp=datetime.utcnow()
         )
-    log.add_field(name="Usuário", value=interaction.user.mention)
-    log.add_field(name="Categoria", value=categoria.name)
-    log.add_field(name="Canal", value=channel.mention)
+        log.add_field(name="Usuário", value=interaction.user.mention)
+        log.add_field(name="Categoria", value=categoria.name)
+        log.add_field(name="Canal", value=channel.mention)
 
-    await self.send_log(guild, log)
+        await self.send_log(guild, log)
 
-    await interaction.response.send_message(
+        await interaction.response.send_message(
             f"✅ Ticket criado em {channel.mention}",
             ephemeral=True
         )
