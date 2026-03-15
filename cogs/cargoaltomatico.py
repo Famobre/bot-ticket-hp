@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 
 # ID DO CARGO QUE VAI SER DADO AUTOMATICAMENTE
-AUTO_ROLE_ID = 1459032319351459951  # coloque o ID do cargo aqui
+AUTO_ROLE_ID =   # coloque o ID do cargo aqui
 
 class CargoAutomatico(commands.Cog):
     def __init__(self, bot):

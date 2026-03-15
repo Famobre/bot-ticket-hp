@@ -9,7 +9,7 @@ LOG_CHANNEL_NAME = "🩹・log-ticket"
 # DESCRIÇÕES POR SETOR
 # ======================
 tickets = {
-    1459032323046510686: {  # PEDIATRIA
+    1482816338572607618: {  # PEDIATRIA
         "titulo": "🧒 PEDIATRIA",
         "descricao": (
             "**NOME DA CRIANÇA:**\n"
@@ -27,7 +27,7 @@ tickets = {
         "image": "https://r2.fivemanage.com/7sUTqcu7vprswr5yQCsH5/14D3AF2A-3AAD-4EC6-A073-74A019A1D0A3.png"
     },
 
-    1459032322803503186: {  # PSICOLOGIA
+    1482816148679557373: {  # PSICOLOGIA
         "titulo": "🧠 PSICOLOGIA",
         "descricao": (
             "**NOME COMPLETO:**\n"
@@ -47,7 +47,7 @@ tickets = {
         "image": "https://r2.fivemanage.com/7sUTqcu7vprswr5yQCsH5/1488EEF0-1380-4EF8-930D-8C8F560E8BA7.png"
     },
 
-    1459032322266628172: {  # CIRURGIA
+    1482816097274298451: {  # CIRURGIA
         "titulo": "💉 CIRURGIA",
         "descricao": (
             "**INFORMAÇÕES DO PACIENTE**\n"
@@ -59,7 +59,7 @@ tickets = {
         "image": "https://r2.fivemanage.com/7sUTqcu7vprswr5yQCsH5/A013B021-450B-4A4E-81CA-F62AD02C668A.png"
     },
 
-    1459032323210215430: {  # OBSTETRÍCIA
+    1482815912183857383: {  # OBSTETRÍCIA
         "titulo": "🤰 OBSTETRÍCIA",
         "descricao": (
             "📌 **AGENDAMENTOS ABERTOS!**\n\n"
@@ -96,7 +96,7 @@ tickets = {
 }
 DESCRICOES_SETOR = {
 
-    1459032321977225360: {  # CLÍNICO GERAL
+    1482816338572607618: {  # CLÍNICO GERAL
         "titulo": "🩺 CLÍNICO GERAL",
         "descricao": (
             "**TIPO DE CONSULTA: EXAME DE DNA**\n"
@@ -161,11 +161,11 @@ DESCRICOES_SETOR = {
     },
 }
 CARGOS_SETOR = {
-    1459032323046510686: 1459032319380819999,  # PEDIATRIA -> ID do cargo Pediatria
-    1459032322803503186: 1459032319380819997,  # PSICOLOGIA -> ID do cargo Psicologia
-    1459032322266628172: 1459032319380820000,  # CIRURGIA -> ID do cargo Cirurgia
-    1459032323210215430: 1459032319380820001,  # OBSTETRÍCIA -> ID do cargo Obstetrícia
-    1459032321977225360: 1459032319380819998,  # CLÍNICO GERAL -> ID do cargo Clínico Geral
+    1482816338572607618: 1459032319380819999,  # PEDIATRIA -> ID do cargo Pediatria
+    1482816148679557373: 1459032319380819997,  # PSICOLOGIA -> ID do cargo Psicologia
+    1482816097274298451: 1459032319380820000,  # CIRURGIA -> ID do cargo Cirurgia
+    1482815912183857383: 1459032319380820001,  # OBSTETRÍCIA -> ID do cargo Obstetrícia
+    1482816338572607618: 1459032321977225360,  # CLÍNICO GERAL -> ID do cargo Clínico Geral
 }
 # =======================
 # BOTÃO FECHAR TICKET
@@ -269,7 +269,7 @@ class TicketView(discord.ui.View):
                 embed.set_image(url=info["image"])
         else:
             embed = discord.Embed(
-                title="🎫 ABERTURA DE TICKET – HOSPITAL DISTRITO",
+                title="🎫 ABERTURA DE TICKET – HOSPITAL FLOW",
                 description="Descreva sua solicitação.",
                 color=discord.Color.dark_gold()
             )
@@ -299,23 +299,23 @@ class TicketView(discord.ui.View):
 
     @discord.ui.button(label="🧒 Pediatria", style=discord.ButtonStyle.danger)
     async def pediatria(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await self.criar_ticket(interaction, 1459032323046510686)
+        await self.criar_ticket(interaction, 1482816338572607618)
 
     @discord.ui.button(label="🤰 Obstetrícia", style=discord.ButtonStyle.danger)
     async def obstetria(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await self.criar_ticket(interaction, 1459032323210215430)
+        await self.criar_ticket(interaction, 1482815912183857383)
 
     @discord.ui.button(label="🧠 Psicologia", style=discord.ButtonStyle.danger)
     async def psicologia(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await self.criar_ticket(interaction, 1459032322803503186)
+        await self.criar_ticket(interaction, 1482816148679557373)
 
     @discord.ui.button(label="💉 Cirurgia", style=discord.ButtonStyle.danger)
     async def cirurgia(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await self.criar_ticket(interaction, 1459032322266628172)
+        await self.criar_ticket(interaction, 1482816097274298451)
 
     @discord.ui.button(label="🩺 Clínico Geral", style=discord.ButtonStyle.danger)
     async def clinico(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await self.criar_ticket(interaction, 1459032321977225360)
+        await self.criar_ticket(interaction, 1482816338572607618)
 # =======================
 # COG
 # =======================
@@ -326,7 +326,7 @@ class Tickets(commands.Cog):
     @commands.command()
     async def painel(self, ctx):
         embed = discord.Embed(
-            title="🎫 PAINEL DE TICKETS – HOSPITAL DISTRITO",
+            title="🎫 PAINEL DE TICKETS – HOSPITAL FLOW",
             description="Escolha abaixo o setor desejado.",
             color=discord.Color.dark_gold()
         )
