@@ -3,7 +3,7 @@ from discord.ext import commands
 from datetime import datetime
 import asyncio
 
-LOG_CHANNEL_NAME = "🩹・log-ticket"
+LOG_CHANNEL_NAME = "💻・ʟᴏɢ-ticket"
 
 # =======================
 # DESCRIÇÕES POR SETOR
