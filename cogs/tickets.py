@@ -9,7 +9,7 @@ LOG_CHANNEL_NAME = "🩹・log-ticket"
 # DESCRIÇÕES POR SETOR
 # ======================
 tickets = {
-    1482816338572607618: {  # PEDIATRIA
+    1482815765798322418: {  # PEDIATRIA
         "titulo": "🧒 PEDIATRIA",
         "descricao": (
             "**NOME DA CRIANÇA:**\n"
@@ -161,7 +161,7 @@ DESCRICOES_SETOR = {
     },
 }
 CARGOS_SETOR = {
-    1482816338572607618: 1459032319380819999,  # PEDIATRIA -> ID do cargo Pediatria
+    1482815765798322418: 1459032319380819999,  # PEDIATRIA -> ID do cargo Pediatria
     1482816148679557373: 1459032319380819997,  # PSICOLOGIA -> ID do cargo Psicologia
     1482816097274298451: 1459032319380820000,  # CIRURGIA -> ID do cargo Cirurgia
     1482815912183857383: 1459032319380820001,  # OBSTETRÍCIA -> ID do cargo Obstetrícia
@@ -299,7 +299,7 @@ class TicketView(discord.ui.View):
 
     @discord.ui.button(label="🧒 Pediatria", style=discord.ButtonStyle.danger)
     async def pediatria(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await self.criar_ticket(interaction, 1482816338572607618)
+        await self.criar_ticket(interaction, 1482815765798322418)
 
     @discord.ui.button(label="🤰 Obstetrícia", style=discord.ButtonStyle.danger)
     async def obstetria(self, interaction: discord.Interaction, button: discord.ui.Button):
