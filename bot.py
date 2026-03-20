@@ -12,6 +12,8 @@ import discord
 from discord.ext import commands
 from flask import Flask, request
 from rich.console import Console
+from keep_alive import keep_alive
+keep_alive()
 
 # -------------------------------
 # CONFIGURAÇÕES
