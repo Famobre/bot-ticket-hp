@@ -331,7 +331,7 @@ class Tickets(commands.Cog):
             color=discord.Color.dark_gold()
         )
 
-        embed.set_image(url="https://imgur.com/a/PbKDDaj.png")
+        embed.set_image(url="https://imgur.com/a/kgVYogB")
 
         await ctx.send(embed=embed, view=TicketView(self.bot))
 async def setup(bot: commands.Bot):
