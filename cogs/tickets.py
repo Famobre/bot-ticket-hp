@@ -24,7 +24,7 @@ tickets = {
             "Após o agendamento, o médico tem até **24 horas** para entrar em contato com o paciente "
             "para marcar o melhor dia e horário para ambos.\n\n"
         ),
-        "image": "https://r2.fivemanage.com/7sUTqcu7vprswr5yQCsH5/14D3AF2A-3AAD-4EC6-A073-74A019A1D0A3.png"
+        "image": "https://cdn.discordapp.com/attachments/1461864204968394752/1482810697778991406/75E2765D-CAD7-4723-970A-390403CB5C66.png"
     },
 
     1482816148679557373: {  # PSICOLOGIA
@@ -44,7 +44,7 @@ tickets = {
             "com o paciente para marcar o melhor dia e horário para ambos.\n\n"
             "🧠 **Desejo um ótimo atendimento** 🩵"
         ),
-        "image": "https://r2.fivemanage.com/7sUTqcu7vprswr5yQCsH5/1488EEF0-1380-4EF8-930D-8C8F560E8BA7.png"
+        "image": "https://cdn.discordapp.com/attachments/1461864204968394752/1482810545139744809/F83829EF-92BA-4DE7-9DE7-1A095EA8AB96.png"
     },
 
     1482816097274298451: {  # CIRURGIA
@@ -56,7 +56,7 @@ tickets = {
             "• Telefone:\n"
             "• Tipo de cirurgia:\n"
         ),
-        "image": "https://r2.fivemanage.com/7sUTqcu7vprswr5yQCsH5/A013B021-450B-4A4E-81CA-F62AD02C668A.png"
+        "image": "https://cdn.discordapp.com/attachments/1461864204968394752/1482810485601730761/86B1D14A-D4EE-4C60-9F72-7D7D4227DC71.png"
     },
 
     1482815912183857383: {  # OBSTETRÍCIA
@@ -78,7 +78,7 @@ tickets = {
             "e devem ser respeitados. Caso não possa comparecer, avise antes para reagendar. "
             "O não comparecimento pode gerar multa por atraso ou falta na consulta."
         ),
-        "image": "https://r2.fivemanage.com/7sUTqcu7vprswr5yQCsH5/CBF1DA5A-5A6D-42B2-9971-5C358A215655.png"
+        "image": "https://cdn.discordapp.com/attachments/1461864204968394752/1482810636483297420/954E4CCC-5CD2-40F1-8117-3A740ADC91BF.png"
     },
 
     1447675217500442636: {  # LAUDOS
@@ -157,7 +157,7 @@ DESCRICOES_SETOR = {
             "• Telefone:\n"
             "• Sexo: (   ) Feminino  (   ) Masculino\n"
         ),
-         "image": "https://r2.fivemanage.com/7sUTqcu7vprswr5yQCsH5/6BB1561E-828E-4653-868B-A164FAEC1D23.png"
+         "image": "https://cdn.discordapp.com/attachments/1461864204968394752/1482810579898077506/80773324-9159-45B4-9324-2B7F7EDE518A.png"
     },
 }
 CARGOS_SETOR = {
