@@ -331,7 +331,7 @@ class Tickets(commands.Cog):
             color=discord.Color.dark_gold()
         )
 
-        embed.set_image(url="https://imgur.com/a/kgVYogB")
+        embed.set_image(url="https://cdn.discordapp.com/attachments/1461864204968394752/1484378263760408586/flow_hp_banner_1.png")
 
         await ctx.send(embed=embed, view=TicketView(self.bot))
 async def setup(bot: commands.Bot):
