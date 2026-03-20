@@ -326,12 +326,12 @@ class Tickets(commands.Cog):
     @commands.command()
     async def painel(self, ctx):
         embed = discord.Embed(
-            title="🎫 PAINEL DE TICKETS – HOSPITAL FLOW",
+            title="🎟️ TICKETS – FLOW MEDICAL CENTER",
             description="Escolha abaixo o setor desejado.",
             color=discord.Color.dark_gold()
         )
 
-        embed.set_image(url="https://r2.fivemanage.com/7sUTqcu7vprswr5yQCsH5/image.png")
+        embed.set_image(url="c:\\Users\\breno\\Pictures\\fundo.png")
 
         await ctx.send(embed=embed, view=TicketView(self.bot))
 async def setup(bot: commands.Bot):
