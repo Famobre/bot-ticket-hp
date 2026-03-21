@@ -12,8 +12,6 @@ import discord
 from discord.ext import commands
 from flask import Flask, request
 from rich.console import Console
-from keep_alive import keep_alive
-keep_alive()
 
 # -------------------------------
 # CONFIGURAÇÕES
@@ -49,28 +47,35 @@ class PlantaoBot(commands.Bot):
         threading.Thread(target=self._start_api, daemon=True).start()
         console.print("[cyan]🌐 API Flask iniciada em thread separada[/cyan]")
 
-    # -------------------------------
-    # API FLASK
-    # -------------------------------
-    def _setup_api(self):
-        @self.app.route("/plantao", methods=["POST"])
-        def plantao_api():
-            """Endpoint para adicionar/remover médicos do plantão via API."""
-            data = request.json
-            user_id = int(data["user_id"])
-            acao = data["acao"]  # entrar / sair
+   # -------------------------------
+# API FLASK
+# -------------------------------
+def _setup_api(self):
 
-            medicos = self.carregar_plantao()
+    @self.app.route("/")
+    def home():
+        return "online 😈"
 
-            if acao == "entrar" and user_id not in medicos:
-                medicos.append(user_id)
-                console.print(f"[green]✅ Usuário {user_id} entrou no plantão[/green]")
-            elif acao == "sair" and user_id in medicos:
-                medicos.remove(user_id)
-                console.print(f"[red]❌ Usuário {user_id} saiu do plantão[/red]")
+    @self.app.route("/plantao", methods=["POST"])
+    def plantao_api():
+        """Endpoint para adicionar/remover médicos do plantão via API."""
+        
+        data = request.json
+        user_id = int(data["user_id"])
+        acao = data["acao"]  # entrar / sair
 
-            self.salvar_plantao(medicos)
-            return {"status": "ok"}
+        medicos = self.carregar_plantao()
+
+        if acao == "entrar" and user_id not in medicos:
+            medicos.append(user_id)
+            console.print(f"[green]✅ Usuário {user_id} entrou no plantão[/green]")
+
+        elif acao == "sair" and user_id in medicos:
+            medicos.remove(user_id)
+            console.print(f"[red]❌ Usuário {user_id} saiu do plantão[/red]")
+
+        self.salvar_plantao(medicos)
+        return {"status": "ok"}
 
     def _start_api(self):
         self.app.run(host="0.0.0.0", port=8080)
