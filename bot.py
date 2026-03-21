@@ -47,7 +47,7 @@ class PlantaoBot(commands.Bot):
         threading.Thread(target=self._start_api, daemon=True).start()
         console.print("[cyan]🌐 API Flask iniciada em thread separada[/cyan]")
 
-   # -------------------------------
+# -------------------------------
 # API FLASK
 # -------------------------------
 def _setup_api(self):
