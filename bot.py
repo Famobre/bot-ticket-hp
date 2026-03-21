@@ -33,7 +33,6 @@ class PlantaoBot(commands.Bot):
         intents = discord.Intents.all()
         super().__init__(command_prefix=BOT_PREFIX, intents=intents)
 
-        # Lista de status cíclicos
         self.status_list = itertools.cycle([
             discord.Game(name="Salvando vidas 🏥"),
             discord.Activity(type=discord.ActivityType.watching, name="ajudando os pacientes 🩺"),
@@ -41,50 +40,46 @@ class PlantaoBot(commands.Bot):
             discord.Game(name="Cuidando de todos 🏙️"),
         ])
 
-        # Iniciar API Flask em thread separada
         self.app = Flask(__name__)
         self._setup_api()
         threading.Thread(target=self._start_api, daemon=True).start()
         console.print("[cyan]🌐 API Flask iniciada em thread separada[/cyan]")
 
-# -------------------------------
-# API FLASK
-# -------------------------------
-def _setup_api(self):
+    # -------------------------------
+    # API FLASK
+    # -------------------------------
+    def _setup_api(self):
 
-    @self.app.route("/")
-    def home():
-        return "online 😈"
+        @self.app.route("/")
+        def home():
+            return "online 😈"
 
-    @self.app.route("/plantao", methods=["POST"])
-    def plantao_api():
-        """Endpoint para adicionar/remover médicos do plantão via API."""
-        
-        data = request.json
-        user_id = int(data["user_id"])
-        acao = data["acao"]  # entrar / sair
+        @self.app.route("/plantao", methods=["POST"])
+        def plantao_api():
+            data = request.json
+            user_id = int(data["user_id"])
+            acao = data["acao"]
 
-        medicos = self.carregar_plantao()
+            medicos = self.carregar_plantao()
 
-        if acao == "entrar" and user_id not in medicos:
-            medicos.append(user_id)
-            console.print(f"[green]✅ Usuário {user_id} entrou no plantão[/green]")
+            if acao == "entrar" and user_id not in medicos:
+                medicos.append(user_id)
+                console.print(f"[green]✅ Usuário {user_id} entrou no plantão[/green]")
 
-        elif acao == "sair" and user_id in medicos:
-            medicos.remove(user_id)
-            console.print(f"[red]❌ Usuário {user_id} saiu do plantão[/red]")
+            elif acao == "sair" and user_id in medicos:
+                medicos.remove(user_id)
+                console.print(f"[red]❌ Usuário {user_id} saiu do plantão[/red]")
 
-        self.salvar_plantao(medicos)
-        return {"status": "ok"}
+            self.salvar_plantao(medicos)
+            return {"status": "ok"}
 
     def _start_api(self):
         self.app.run(host="0.0.0.0", port=8080)
 
     # -------------------------------
-    # ARQUIVOS DE PLANTÃO
+    # ARQUIVOS
     # -------------------------------
     def carregar_plantao(self) -> List[int]:
-        """Carrega lista de médicos do plantão."""
         if not os.path.exists(ARQUIVO_PLANTAO):
             with open(ARQUIVO_PLANTAO, "w") as f:
                 json.dump([], f)
@@ -92,7 +87,6 @@ def _setup_api(self):
             return json.load(f)
 
     def salvar_plantao(self, lista: List[int]) -> None:
-        """Salva lista de médicos no arquivo JSON."""
         with open(ARQUIVO_PLANTAO, "w") as f:
             json.dump(lista, f, indent=4)
 
