@@ -74,7 +74,7 @@ class PlantaoBot(commands.Bot):
             return {"status": "ok"}
 
     def _start_api(self):
-        self.app.run(host="0.0.0.0", port=8080)
+     self.app.run(host="0.0.0.0", port=8080, debug=False)
 
     # -------------------------------
     # ARQUIVOS
@@ -132,5 +132,12 @@ class PlantaoBot(commands.Bot):
 # RODAR O BOT
 # -------------------------------
 if __name__ == "__main__":
-    bot = PlantaoBot()
-    bot.run(os.getenv("DISCORD_TOKEN"))
+    while True:
+        try:
+            bot = PlantaoBot()
+            bot.run(os.getenv("DISCORD_TOKEN"))
+        except Exception as e:
+            print(f"Erro: {e}")
+            print("Reiniciando em 5 segundos...")
+            import time
+            time.sleep(5)
